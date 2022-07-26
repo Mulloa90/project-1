@@ -1,0 +1,12 @@
+.hero {
+    background: linear-gradient(to top left, #ff8906, #f25f4c, #e53170);
+}
+
+.search-button {
+    color: white;
+    background: linear-gradient(to top left, #e53170, #f25f4c, #ff8906);
+}
+
+.section {
+    padding: 1.5rem 2rem;
+}
