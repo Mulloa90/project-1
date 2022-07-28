@@ -10,3 +10,7 @@
 .section {
     padding: 1.5rem 2rem;
 }
+
+#searchForm {
+    display: flex;
+}
