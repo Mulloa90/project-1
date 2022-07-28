@@ -14,3 +14,8 @@
 #searchForm {
     display: flex;
 }
+/* This is the styling for the map; we can change the height as we like */
+#map {
+    height: 440px; 
+    border: 1px solid #f25f4c;
+}
