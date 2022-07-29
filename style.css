@@ -11,6 +11,9 @@
     padding: 1.5rem 2rem;
 }
 
+#searchForm {
+    display: flex;
+}
 /* This is the styling for the map; we can change the height as we like */
 #map {
     height: 440px; 
