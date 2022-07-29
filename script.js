@@ -32,8 +32,19 @@ function currentWeather(lat, lon) {
     })
     .then((data) => {
       console.log(data);
+      displayWeather(data);
     })
     .catch((err) => {
       console.log(err);
     });
+}
+var weatherCard = document.getElementById("weatherCard");
+function displayWeather(data) {
+  weatherCard.innerHTML = `
+    <h2>WEATHER:</h2>
+    <p class="content">Temperature:${data.current.temp}°F</p>
+    <p class="content">Wind Speed:${data.current.wind_speed}mph</p>
+     <p class="content">Humidity:${data.current.humidity}%</p>
+    <p class="content">UV Index:${data.current.uvi}</p>
+    `;
 }
