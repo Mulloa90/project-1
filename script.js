@@ -1,3 +1,4 @@
+
 // openstreetmap API
 var API_KEY = "533d85454b838c8602df5b7476173c44";
 var searchButton = document.querySelector("searchButton");
@@ -48,3 +49,4 @@ function displayWeather(data) {
     <p class="content">UV Index:${data.current.uvi}</p>
     `;
 }
+
