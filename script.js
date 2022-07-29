@@ -1,12 +1,13 @@
 
 // openstreetmap API
-var API_KEY = "533d85454b838c8602df5b7476173c44";
+var API_KEY = "8bf5f2722c9876aa403f1c90a0b421c1";
 var searchButton = document.querySelector("searchButton");
-var searchForm = document.querySelector("#searchForm");
-
-searchForm.addEventListener("submit", function (e) {
+var searchForm = document.querySelector("#search-btn");
+var cityInputEl = document.querySelector("#city-name")
+searchForm.addEventListener("click", function (e) {
   e.preventDefault();
-  getLatandLon(e.target.children[1].value);
+  console.log(cityInputEl.value)
+  getLatandLon(cityInputEl.value);
 });
 
 function getLatandLon(cityName) {
@@ -41,6 +42,7 @@ function currentWeather(lat, lon) {
 }
 var weatherCard = document.getElementById("weatherCard");
 function displayWeather(data) {
+    console.log(data, "displayWeather")
   weatherCard.innerHTML = `
     <h2>WEATHER:</h2>
     <p class="content">Temperature:${data.current.temp}°F</p>
