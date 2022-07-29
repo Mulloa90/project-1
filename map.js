@@ -6,7 +6,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
 }).addTo(map);
 
-const weatherAPIKey = "MARIO_API_KEY";
+const weatherAPIKey = API_KEY;
 const searchFormEl = document.querySelector("#search-btn");
 
 let cityInput = document.getElementById("city-name");
