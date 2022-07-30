@@ -6,6 +6,17 @@ let hotels = document.getElementById('hotels');
 let artworks = document.getElementById('artworks');
 let museums = document.getElementById('museums');
 
+let newIcon = L.Icon.extend({
+    options: {
+        iconSize: [35, 50],
+        popupAnchor: [0, 0]
+    }
+});
+
+let blackIcon = new newIcon({ iconUrl: 'blackIcon.png' }),
+    blueIcon = new newIcon({ iconUrl: 'blueIcon.png' }),
+    pinkIcon = new newIcon({ iconUrl: 'pinkIcon.png' });
+
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '© OpenStreetMap'
@@ -67,9 +78,80 @@ let relocate = function (city) {
                             console.log(data);
 
                             for (var i = 0; i < 25; ++i) {
-                                L.marker([data.elements[i].lat, data.elements[i].lon])
-                                    .bindPopup('<a href="" target="_blank" rel="noopener">' + data.elements[i].tags.name + '</a>')
-                                    .addTo(map);
+                                if (data.elements[i].tags.name) {
+                                    let popupName = data.elements[i].tags.name;
+
+                                    L.marker([data.elements[i].lat, data.elements[i].lon], { icon: pinkIcon })
+                                        .bindPopup('<a href="" target="_blank" rel="noopener">' + popupName + '</a>')
+                                        .addTo(map);
+                                }
+                                else {
+                                    let popupName = "Museum here";
+                                    L.marker([data.elements[i].lat, data.elements[i].lon], { icon: pinkIcon })
+                                        .bindPopup('<a href="" target="_blank" rel="noopener">' + popupName + '</a>')
+                                        .addTo(map);
+                                }
+                            }
+
+                        })
+                    // }
+
+                    // if (toilets) {
+                    fetch(
+
+                        'https://overpass-api.de/api/interpreter?data=[out:json][timeout:25];(node["amenity"="toilets"](' + bbox + ');way["amenity"="toilets"](' + bbox + ');relation["amenity"="toilets"](' + bbox + '););out;>;out skel qt;'
+                    )
+                        .then((result) => {
+                            return result.json();
+                        })
+                        .then((data) => {
+                            console.log(data);
+
+                            for (var i = 0; i < 25; ++i) {
+
+                                if (data.elements[i].tags.name) {
+                                    let popupName = data.elements[i].tags.name;
+
+                                    L.marker([data.elements[i].lat, data.elements[i].lon], { icon: blackIcon })
+                                        .bindPopup('<a href="" target="_blank" rel="noopener">' + popupName + '</a>')
+                                        .addTo(map);
+                                } else {
+                                    let popupName = "Toilet here";
+
+                                    L.marker([data.elements[i].lat, data.elements[i].lon], { icon: blackIcon })
+                                        .bindPopup('<a href="" target="_blank" rel="noopener">' + popupName + '</a>')
+                                        .addTo(map);
+                                }
+                            }
+
+                        })
+                    // }
+
+                    // if (public art) {
+                    fetch(
+
+                        'https://overpass-api.de/api/interpreter?data=[out:json][timeout:25];(node["tourism"="artwork"](' + bbox + ');way["tourism"="artwork"](' + bbox + ');relation["tourism"="artwork"](' + bbox + '););out;>;out skel qt;'
+                    )
+                        .then((result) => {
+                            return result.json();
+                        })
+                        .then((data) => {
+                            console.log(data);
+
+                            for (var i = 0; i < 25; ++i) {
+                                if (data.elements[i].tags.name) {
+                                    let popupName = data.elements[i].tags.name;
+
+                                    L.marker([data.elements[i].lat, data.elements[i].lon], { icon: blueIcon })
+                                        .bindPopup('<a href="" target="_blank" rel="noopener">' + popupName + '</a>')
+                                        .addTo(map);
+                                }
+                                else {
+                                    let popupName = "Artwork here";
+                                    L.marker([data.elements[i].lat, data.elements[i].lon], { icon: blueIcon })
+                                        .bindPopup('<a href="" target="_blank" rel="noopener">' + popupName + '</a>')
+                                        .addTo(map);
+                                }
                             }
 
                         })
@@ -79,44 +161,6 @@ let relocate = function (city) {
             }
         })
 };
-
-
-// object keys: lat lon tags.name
-
-/*
-
-markers = [
-   {
-     "name": tags.name,
-     "lat": lat,
-     "lng": lon
-   },
-
-
-for (var i=0; i < markers.length; ++i) 
-{
-   L.marker([markers[i].lat, markers[i].lng])
-      .bindPopup('<a href="" target="_blank" rel="noopener">' + markers[i].name + '</a>')
-      .addTo(map);
-}
-
-    let cityURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + weatherAPIKey;
-    let latLonData;
-
-    fetch(cityURL)
-        .then(function (response) {
-            if (response.ok) {
-                console.log(response);
-                response.json().then(function (data) {
-                    console.log(data);
-                    latLonData = data;
-                    console.log(latLonData);
-
-                    let latitude = data[0].lat;
-                    let longitude = data[0].lon;
-
-*/
-
 
 searchFormEl.addEventListener("click", formSubmitHandler);
 
