@@ -11,7 +11,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
 }).addTo(map);
 
-const weatherAPIKey = API_KEY;
+const weatherAPIKey = "8bf5f2722c9876aa403f1c90a0b421c1";
 const searchFormEl = document.querySelector("#search-btn");
 
 let cityInput = document.getElementById("city-name");
@@ -55,7 +55,7 @@ let relocate = function (city) {
                     let bbox = south + ',' + west + ',' + north + ',' + east;
                     console.log(bbox);
 
-                    if (museums) {
+                    // if (museums) {
                     fetch(
 
                         'https://overpass-api.de/api/interpreter?data=[out:json][timeout:25];(node["tourism"="museum"](' + bbox + ');way["tourism"="museum"](' + bbox + ');relation["tourism"="museum"](' + bbox + '););out;>;out skel qt;'
@@ -65,8 +65,15 @@ let relocate = function (city) {
                         })
                         .then((data) => {
                             console.log(data);
+
+                            for (var i = 0; i < 25; ++i) {
+                                L.marker([data.elements[i].lat, data.elements[i].lon])
+                                    .bindPopup('<a href="" target="_blank" rel="noopener">' + data.elements[i].tags.name + '</a>')
+                                    .addTo(map);
+                            }
+
                         })
-                    }
+                    // }
 
                 })
             }
@@ -84,6 +91,7 @@ markers = [
      "lat": lat,
      "lng": lon
    },
+
 
 for (var i=0; i < markers.length; ++i) 
 {
