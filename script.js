@@ -1,4 +1,3 @@
-
 // openstreetmap API
 var API_KEY = "8bf5f2722c9876aa403f1c90a0b421c1";
 var searchButton = document.querySelector("#search-btn");
@@ -23,6 +22,7 @@ searchButton.addEventListener("click", function (event) {
   if (destinationText === "") {
       return;
   }
+  
   destinations.push(destinationText);
   storeDestinations();
   listDestinations();
@@ -82,9 +82,6 @@ function listDestinations() {
 
     for (var i = 0; i < destinations.length; i++) {
         let prevDestinations = destinations[i];
-
-  if (destinations.indexOf(destinationText) !== -1) {
-
         let button = document.createElement('button');
         button.setAttribute('class', 'button is-danger is-outlined is-fullwidth');
 
@@ -94,8 +91,7 @@ function listDestinations() {
 
         button.appendChild(list);
         searchList.appendChild(button);
-      };
-  };
+    };
 };
 
 function storeDestinations() {
@@ -118,10 +114,7 @@ searchForm.addEventListener("submit", function (event) {
 
 function init() {
   let storedDestinations = JSON.parse(localStorage.getItem("destinations"));
-
-  if (storedDestinations !== null) {
       destinations = storedDestinations;
-  }
   listDestinations();
 };
 
