@@ -13,8 +13,7 @@
     height: 100PX;
     font-size: 25px;
 }
-
-.card-header-title {
+.primary-header {
     display: flex;
     justify-content: center;
     font-size: 35px;
