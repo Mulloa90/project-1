@@ -27,6 +27,11 @@ input[type="text"] {
     padding: 1.5rem 2rem;
 }
 
+
+#clock {
+    font-family: 'Roboto Mono', monospace;
+}
+
 #searchForm {
     display: flex;
 }
