@@ -6,7 +6,8 @@
     color: white;
     background: linear-gradient(to top left, #e53170, #f25f4c, #ff8906);
 }
- #search-btn {
+
+#search-btn {
     margin-left: 37%;
     width: 300px;
     height: 100PX;
@@ -37,18 +38,22 @@ input[type="text"] {
 #searchForm {
     display: flex;
 }
+
 /* This is the styling for the map; we can change the height as we like */
 #map {
-    height: 440px; 
+    height: 440px;
     border: 1px solid #f25f4c;
 }
- .checkbox-container {
-display: flex;
-justify-content: center;
+
+.checkbox-container {
+    display: flex;
+    justify-content: center;
 }
+
 .checkbox-container input [type="checkbox"] {
     cursor: pointer;
 }
+
 .checkbox {
     padding: 2%;
     margin: 2%;
