@@ -2,6 +2,8 @@
 
 let map = L.map('map').setView([32.7157, -117.1611], 12);
 
+console.log(map);
+
 let hotels = document.getElementById('hotels');
 let artworks = document.getElementById('artworks');
 let museums = document.getElementById('museums');
