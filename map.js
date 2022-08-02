@@ -160,3 +160,10 @@ let relocate = function (city) {
 
 searchFormEl.addEventListener("click", formSubmitHandler);
 
+$('#searches').on("click", (event) => {
+    event.preventDefault();
+
+    $('.searches-2').val(event.target.textContent);
+    prevSearchCity=$('.searches-2').val();
+    relocate(prevSearchCity);
+});

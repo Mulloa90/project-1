@@ -81,7 +81,7 @@ function listDestinations() {
       let prevDestinations = destinations[i];
 
       let button = document.createElement('button');
-      button.setAttribute('class', 'button is-danger is-outlined is-fullwidth');
+      button.setAttribute('class', 'button is-danger is-outlined is-fullwidth searches-2');
 
       let list = document.createElement("p");
       list.textContent = prevDestinations;
