@@ -48,6 +48,21 @@
           <p class="card-header-title">Plan your trip!</p>
           <form id="search-form" class="card-footer">
             <input id="city-name" class="input" type="text" placeholder="Destination">
+            <!-- Insert checkboxes here -->
+            <div class="checkbox-container">
+              <label class="checkbox">
+                <input type="checkbox">
+                museums
+              </label>
+              <label class="checkbox">
+                <input type="checkbox">
+                public restrooms
+              </label>
+              <label class="checkbox">
+                <input type="checkbox">
+                public art
+              </label>
+            </div>
             <button type="submit" class="button search-button" id="search-btn">Search!</a>
           </form>
         </div>
@@ -105,12 +120,10 @@
 <script
   src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
   integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
-  crossorigin=""
-></script>
-  
-<script
-  src="./map.js"
-></script>
+  crossorigin=""></script>
+
+  <script src="./map.js"></script>
+
 
 
 </html>
