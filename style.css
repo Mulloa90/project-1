@@ -50,35 +50,21 @@ input[type="text"] {
     border: 1px solid #f25f4c;
 }
 
-<<<<<<< HEAD
 /*
  .checkbox-container {
 display: flex;
 justify-content: center;
 }
 */
-=======
-.checkbox-container {
-    display: flex;
-    justify-content: center;
-}
->>>>>>> d6162f7778969e3ff5098dc9fc6da6e968306a83
 
 .checkbox-container input [type="checkbox"] {
     cursor: pointer;
 }
 
-<<<<<<< HEAD
 /*
-=======
->>>>>>> d6162f7778969e3ff5098dc9fc6da6e968306a83
 .checkbox {
     padding: 2%;
     margin: 2%;
     font-size: 30px;
-<<<<<<< HEAD
 }
 */
-=======
-}
->>>>>>> d6162f7778969e3ff5098dc9fc6da6e968306a83
