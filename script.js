@@ -22,7 +22,6 @@ searchButton.addEventListener("click", function (event) {
   if (destinationText === "") {
       return;
   }
-  
   destinations.push(destinationText);
   storeDestinations();
   listDestinations();
@@ -78,20 +77,19 @@ function listDestinations() {
 
   searchList.innerHTML = "";
 
-  // PREVENT DUPLICATE ADDITION
+  for (var i = 0; i < destinations.length; i++) {
+      let prevDestinations = destinations[i];
 
-    for (var i = 0; i < destinations.length; i++) {
-        let prevDestinations = destinations[i];
-        let button = document.createElement('button');
-        button.setAttribute('class', 'button is-danger is-outlined is-fullwidth');
+      let button = document.createElement('button');
+      button.setAttribute('class', 'button is-danger is-outlined is-fullwidth');
 
-        let list = document.createElement("p");
-        list.textContent = prevDestinations;
-        list.setAttribute("data-index", i);
+      let list = document.createElement("p");
+      list.textContent = prevDestinations;
+      list.setAttribute("data-index", i);
 
-        button.appendChild(list);
-        searchList.appendChild(button);
-    };
+      button.appendChild(list)
+      searchList.appendChild(button);
+  }
 };
 
 function storeDestinations() {
@@ -105,16 +103,16 @@ searchForm.addEventListener("submit", function (event) {
       return;
   }
   destinations.push(destinationText);
-
-  if (destinations.indexOf(destinationText) !== -1) {
-    storeDestinations();
-    listDestinations();
-  };
+  storeDestinations();
+  listDestinations();
 });
 
 function init() {
   let storedDestinations = JSON.parse(localStorage.getItem("destinations"));
+
+  if (storedDestinations !== null) {
       destinations = storedDestinations;
+  }
   listDestinations();
 };
 
