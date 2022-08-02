@@ -13,9 +13,9 @@ let newIcon = L.Icon.extend({
     }
 });
 
-let blackIcon = new newIcon({ iconUrl: 'blackIcon.png' }),
-    blueIcon = new newIcon({ iconUrl: 'blueIcon.png' }),
-    pinkIcon = new newIcon({ iconUrl: 'pinkIcon.png' });
+let blackIcon = new newIcon({ iconUrl: 'assets/blackIcon.png' }),
+    blueIcon = new newIcon({ iconUrl: 'assets/blueIcon.png' }),
+    pinkIcon = new newIcon({ iconUrl: 'assets/pinkIcon.png' });
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,

@@ -11,7 +11,7 @@ The application can be seen [here](https://mulloa90.github.io/project-1/).
 
 The following image shows the web application's appearance and functionality:
 
-![The travel app includes a search bar, point selections, a map, and a weather view, as well as a sidebar logging previous searches.](./assets/weather-dashboard.gif)
+![The travel app includes a search bar, point selections, a map, and a weather view, as well as a sidebar logging previous searches.](./assets/ADVNTR.gif)
 
 ## User Story
 ```
