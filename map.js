@@ -2,8 +2,8 @@
 
 let map = L.map('map').setView([32.7157, -117.1611], 12);
 
-let hotels = document.getElementById('hotels');
-let artworks = document.getElementById('artworks');
+let publicToilet = document.getElementById('public-restrooms');
+let publicArt = document.getElementById('public-art');
 let museums = document.getElementById('museums');
 
 let newIcon = L.Icon.extend({
@@ -29,7 +29,6 @@ let cityInput = document.getElementById("city-name");
 
 let formSubmitHandler = function (event) {
     event.preventDefault();
-
     let cityName = cityInput.value.trim();
 
     if (cityName) {
@@ -66,96 +65,93 @@ let relocate = function (city) {
                     let bbox = south + ',' + west + ',' + north + ',' + east;
                     console.log(bbox);
 
-                    // if (museums) {
-                    fetch(
+                    if (museums.checked) {
+                        fetch(
+                            'https://overpass-api.de/api/interpreter?data=[out:json][timeout:25];(node["tourism"="museum"](' + bbox + ');way["tourism"="museum"](' + bbox + ');relation["tourism"="museum"](' + bbox + '););out;>;out skel qt;'
+                        )
+                            .then((result) => {
+                                return result.json();
+                            })
+                            .then((data) => {
+                                console.log(data);
 
-                        'https://overpass-api.de/api/interpreter?data=[out:json][timeout:25];(node["tourism"="museum"](' + bbox + ');way["tourism"="museum"](' + bbox + ');relation["tourism"="museum"](' + bbox + '););out;>;out skel qt;'
-                    )
-                        .then((result) => {
-                            return result.json();
-                        })
-                        .then((data) => {
-                            console.log(data);
+                                for (var i = 0; i < 25; ++i) {
+                                    if (data.elements[i].tags.name) {
+                                        let popupName = data.elements[i].tags.name;
 
-                            for (var i = 0; i < 25; ++i) {
-                                if (data.elements[i].tags.name) {
-                                    let popupName = data.elements[i].tags.name;
-
-                                    L.marker([data.elements[i].lat, data.elements[i].lon], { icon: pinkIcon })
-                                        .bindPopup('<a href="" target="_blank" rel="noopener">' + popupName + '</a>')
-                                        .addTo(map);
+                                        L.marker([data.elements[i].lat, data.elements[i].lon], { icon: pinkIcon })
+                                            .bindPopup('<a href="" target="_blank" rel="noopener">' + popupName + '</a>')
+                                            .addTo(map);
+                                    }
+                                    else {
+                                        let popupName = "Museum here";
+                                        L.marker([data.elements[i].lat, data.elements[i].lon], { icon: pinkIcon })
+                                            .bindPopup('<a href="" target="_blank" rel="noopener">' + popupName + '</a>')
+                                            .addTo(map);
+                                    }
                                 }
-                                else {
-                                    let popupName = "Museum here";
-                                    L.marker([data.elements[i].lat, data.elements[i].lon], { icon: pinkIcon })
-                                        .bindPopup('<a href="" target="_blank" rel="noopener">' + popupName + '</a>')
-                                        .addTo(map);
+
+                            })
+                    }
+
+                    if (publicToilet.checked) {
+                        fetch(
+                            'https://overpass-api.de/api/interpreter?data=[out:json][timeout:25];(node["amenity"="toilets"](' + bbox + ');way["amenity"="toilets"](' + bbox + ');relation["amenity"="toilets"](' + bbox + '););out;>;out skel qt;'
+                        )
+                            .then((result) => {
+                                return result.json();
+                            })
+                            .then((data) => {
+                                console.log(data);
+
+                                for (var i = 0; i < 25; ++i) {
+
+                                    if (data.elements[i].tags.name) {
+                                        let popupName = data.elements[i].tags.name;
+
+                                        L.marker([data.elements[i].lat, data.elements[i].lon], { icon: blackIcon })
+                                            .bindPopup('<a href="" target="_blank" rel="noopener">' + popupName + '</a>')
+                                            .addTo(map);
+                                    } else {
+                                        let popupName = "Toilet here";
+
+                                        L.marker([data.elements[i].lat, data.elements[i].lon], { icon: blackIcon })
+                                            .bindPopup('<a href="" target="_blank" rel="noopener">' + popupName + '</a>')
+                                            .addTo(map);
+                                    }
                                 }
-                            }
 
-                        })
-                    // }
+                            })
+                    }
 
-                    // if (toilets) {
-                    fetch(
+                    if (publicArt.checked) {
+                        fetch(
+                            'https://overpass-api.de/api/interpreter?data=[out:json][timeout:25];(node["tourism"="artwork"](' + bbox + ');way["tourism"="artwork"](' + bbox + ');relation["tourism"="artwork"](' + bbox + '););out;>;out skel qt;'
+                        )
+                            .then((result) => {
+                                return result.json();
+                            })
+                            .then((data) => {
+                                console.log(data);
 
-                        'https://overpass-api.de/api/interpreter?data=[out:json][timeout:25];(node["amenity"="toilets"](' + bbox + ');way["amenity"="toilets"](' + bbox + ');relation["amenity"="toilets"](' + bbox + '););out;>;out skel qt;'
-                    )
-                        .then((result) => {
-                            return result.json();
-                        })
-                        .then((data) => {
-                            console.log(data);
+                                for (var i = 0; i < 25; ++i) {
+                                    if (data.elements[i].tags.name) {
+                                        let popupName = data.elements[i].tags.name;
 
-                            for (var i = 0; i < 25; ++i) {
-
-                                if (data.elements[i].tags.name) {
-                                    let popupName = data.elements[i].tags.name;
-
-                                    L.marker([data.elements[i].lat, data.elements[i].lon], { icon: blackIcon })
-                                        .bindPopup('<a href="" target="_blank" rel="noopener">' + popupName + '</a>')
-                                        .addTo(map);
-                                } else {
-                                    let popupName = "Toilet here";
-
-                                    L.marker([data.elements[i].lat, data.elements[i].lon], { icon: blackIcon })
-                                        .bindPopup('<a href="" target="_blank" rel="noopener">' + popupName + '</a>')
-                                        .addTo(map);
+                                        L.marker([data.elements[i].lat, data.elements[i].lon], { icon: blueIcon })
+                                            .bindPopup('<a href="" target="_blank" rel="noopener">' + popupName + '</a>')
+                                            .addTo(map);
+                                    }
+                                    else {
+                                        let popupName = "Artwork here";
+                                        L.marker([data.elements[i].lat, data.elements[i].lon], { icon: blueIcon })
+                                            .bindPopup('<a href="" target="_blank" rel="noopener">' + popupName + '</a>')
+                                            .addTo(map);
+                                    }
                                 }
-                            }
 
-                        })
-                    // }
-
-                    // if (public art) {
-                    fetch(
-
-                        'https://overpass-api.de/api/interpreter?data=[out:json][timeout:25];(node["tourism"="artwork"](' + bbox + ');way["tourism"="artwork"](' + bbox + ');relation["tourism"="artwork"](' + bbox + '););out;>;out skel qt;'
-                    )
-                        .then((result) => {
-                            return result.json();
-                        })
-                        .then((data) => {
-                            console.log(data);
-
-                            for (var i = 0; i < 25; ++i) {
-                                if (data.elements[i].tags.name) {
-                                    let popupName = data.elements[i].tags.name;
-
-                                    L.marker([data.elements[i].lat, data.elements[i].lon], { icon: blueIcon })
-                                        .bindPopup('<a href="" target="_blank" rel="noopener">' + popupName + '</a>')
-                                        .addTo(map);
-                                }
-                                else {
-                                    let popupName = "Artwork here";
-                                    L.marker([data.elements[i].lat, data.elements[i].lon], { icon: blueIcon })
-                                        .bindPopup('<a href="" target="_blank" rel="noopener">' + popupName + '</a>')
-                                        .addTo(map);
-                                }
-                            }
-
-                        })
-                    // }
+                            })
+                    }
 
                 })
             }
