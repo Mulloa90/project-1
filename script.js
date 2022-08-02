@@ -78,19 +78,24 @@ function listDestinations() {
 
   searchList.innerHTML = "";
 
-  for (var i = 0; i < destinations.length; i++) {
-      let prevDestinations = destinations[i];
+  // PREVENT DUPLICATE ADDITION
 
-      let button = document.createElement('button');
-      button.setAttribute('class', 'button is-danger is-outlined is-fullwidth');
+    for (var i = 0; i < destinations.length; i++) {
+        let prevDestinations = destinations[i];
 
-      let list = document.createElement("p");
-      list.textContent = prevDestinations;
-      list.setAttribute("data-index", i);
+  if (destinations.indexOf(destinationText) !== -1) {
 
-      button.appendChild(list)
-      searchList.appendChild(button);
-  }
+        let button = document.createElement('button');
+        button.setAttribute('class', 'button is-danger is-outlined is-fullwidth');
+
+        let list = document.createElement("p");
+        list.textContent = prevDestinations;
+        list.setAttribute("data-index", i);
+
+        button.appendChild(list);
+        searchList.appendChild(button);
+      };
+  };
 };
 
 function storeDestinations() {
@@ -104,8 +109,11 @@ searchForm.addEventListener("submit", function (event) {
       return;
   }
   destinations.push(destinationText);
-  storeDestinations();
-  listDestinations();
+
+  if (destinations.indexOf(destinationText) !== -1) {
+    storeDestinations();
+    listDestinations();
+  };
 });
 
 function init() {
