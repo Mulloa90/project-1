@@ -2,10 +2,12 @@
 
 let map = L.map('map').setView([32.7157, -117.1611], 12);
 
+// identifying the checkboxes
 let publicToilet = document.getElementById('public-restrooms');
 let publicArt = document.getElementById('public-art');
 let museums = document.getElementById('museums');
 
+//customizing the icon sizes
 let newIcon = L.Icon.extend({
     options: {
         iconSize: [35, 50],
@@ -13,10 +15,12 @@ let newIcon = L.Icon.extend({
     }
 });
 
+// Links to the custom icons
 let blackIcon = new newIcon({ iconUrl: 'blackIcon.png' }),
     blueIcon = new newIcon({ iconUrl: 'blueIcon.png' }),
     pinkIcon = new newIcon({ iconUrl: 'pinkIcon.png' });
 
+//building the map with leaflet
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '© OpenStreetMap'
@@ -27,6 +31,7 @@ const searchFormEl = document.querySelector("#search-btn");
 
 let cityInput = document.getElementById("city-name");
 
+// formSubmitHandler for building the map markers
 let formSubmitHandler = function (event) {
     event.preventDefault();
     let cityName = cityInput.value.trim();
@@ -38,6 +43,7 @@ let formSubmitHandler = function (event) {
     }
 }
 
+// repositioning the map and populating the markers
 let relocate = function (city) {
 
     let cityURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + weatherAPIKey;
@@ -57,6 +63,8 @@ let relocate = function (city) {
 
                     map.panTo([latitude, longitude]);
 
+                    // only collects data for the current map boundaries
+
                     let north = map.getBounds().getNorth();
                     let east = map.getBounds().getEast();
                     let south = map.getBounds().getSouth();
@@ -65,6 +73,7 @@ let relocate = function (city) {
                     let bbox = south + ',' + west + ',' + north + ',' + east;
                     console.log(bbox);
 
+                    // museum markers
                     if (museums.checked) {
                         fetch(
                             'https://overpass-api.de/api/interpreter?data=[out:json][timeout:25];(node["tourism"="museum"](' + bbox + ');way["tourism"="museum"](' + bbox + ');relation["tourism"="museum"](' + bbox + '););out;>;out skel qt;'
@@ -94,6 +103,7 @@ let relocate = function (city) {
                             })
                     }
 
+                    // public restroom markers
                     if (publicToilet.checked) {
                         fetch(
                             'https://overpass-api.de/api/interpreter?data=[out:json][timeout:25];(node["amenity"="toilets"](' + bbox + ');way["amenity"="toilets"](' + bbox + ');relation["amenity"="toilets"](' + bbox + '););out;>;out skel qt;'
@@ -124,6 +134,7 @@ let relocate = function (city) {
                             })
                     }
 
+                    // public art markers
                     if (publicArt.checked) {
                         fetch(
                             'https://overpass-api.de/api/interpreter?data=[out:json][timeout:25];(node["tourism"="artwork"](' + bbox + ');way["tourism"="artwork"](' + bbox + ');relation["tourism"="artwork"](' + bbox + '););out;>;out skel qt;'
@@ -160,6 +171,7 @@ let relocate = function (city) {
 
 searchFormEl.addEventListener("click", formSubmitHandler);
 
+// repopulates map with previous search data
 $('#searches').on("click", (event) => {
     event.preventDefault();
 

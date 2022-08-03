@@ -5,7 +5,13 @@ ADVNTR is a web app for adventurers. It is designed to help those who seek adven
 
 ADVNTR is designed to help you plan for the weather and your itinerary as you journey towards your destinations. So get your Subaru Outback, your buddies, and a 6-pack of your IPA of choice, and get ADVNTRin’™!
 
-The application can be seen [here](https://mulloa90.github.io/project-1/).
+ADVNTR uses the following APIs and other technologies:
+- [OpenWeather API](https://openweathermap.org/api/one-call-api)
+- [Leaflet (JavaScript library)](https://leafletjs.com/)
+- [OpenStreetMap, an open source mapping project](https://www.openstreetmap.org/)
+- [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API)
+
+The deployed application can be seen [here](https://mulloa90.github.io/project-1/).
 
 ## Mock-Up
 
